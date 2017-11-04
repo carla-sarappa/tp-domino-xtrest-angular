@@ -16,6 +16,7 @@ import ar.edu.unq.uis.domino.model.Cliente
 import ar.edu.unq.uis.domino.exceptions.BusinessException
 import javax.servlet.http.HttpServletResponse
 import org.uqbar.xtrest.api.Result
+import ar.edu.unq.uis.domino.data.SignupRequest
 
 /**
  * Servidor RESTful implementado con XtRest.
@@ -126,6 +127,18 @@ class Server {
 		
     }
     
- 
+	@Post("/usuarios")
+    def signup(@Body String body){
+    	
+    	execute(response)[
+    		val signupRequest = body.fromJson(SignupRequest)
+	        val cliente = Repositories.clientes.createCliente(signupRequest.username,signupRequest.nombre,signupRequest.email)
+	      
+	        cliente.setPassword(signupRequest.password)
+	        cliente.setDireccion(signupRequest.direccion)
+			
+			return ok()
+    	]         
+    }
 
 }
