@@ -11,6 +11,11 @@ import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.http.ContentType
 import org.uqbar.xtrest.json.JSONUtils
+import ar.edu.unq.uis.domino.data.LoginRequest
+import ar.edu.unq.uis.domino.model.Cliente
+import ar.edu.unq.uis.domino.exceptions.BusinessException
+import javax.servlet.http.HttpServletResponse
+import org.uqbar.xtrest.api.Result
 
 /**
  * Servidor RESTful implementado con XtRest.
@@ -19,8 +24,7 @@ import org.uqbar.xtrest.json.JSONUtils
 class Server {
     extension JSONUtils = new JSONUtils
     
-    new() {
-       
+    new() {    
     }
 
 
@@ -87,6 +91,39 @@ class Server {
         	val pedidoResponse = PedidoRequest.from(pedido)
             return ok(pedidoResponse.toJson)
         }
+    }
+    
+    @Post("/login")
+    def login(@Body String body){
+    	
+    	execute(response)[
+    		val loginRequest = body.fromJson(LoginRequest)
+	        val cliente = Repositories.clientes.searchByExample(new Cliente (loginRequest.username, null, null)).head
+			
+			assertCondition (cliente == null, "No existe usuario registrado")
+			assertCondition(loginRequest.password != cliente.password, "Contraseña incorrecta")
+			
+			return ok()
+    	]         
+    }
+    
+    def assertCondition(Boolean condicion, String error){
+    	if (!condicion){
+    		throw new BusinessException(error)
+    	}
+    }
+    
+    def execute(HttpServletResponse response, () => Result bloque){
+    	try {
+	       	response.contentType = ContentType.APPLICATION_JSON
+	       	return bloque.apply
+			
+		} catch(BusinessException e) {
+			return badRequest(e.message)
+		} catch(Exception e) { 
+			return internalServerError(e.toString)
+		}
+		
     }
 
 }
