@@ -98,16 +98,16 @@ class Server {
     	
     	execute(response)[
     		val loginRequest = body.fromJson(LoginRequest)
-	        val cliente = Repositories.clientes.searchByExample(new Cliente (loginRequest.username, null, null)).head
+	        val cliente = Repositories.clientes.findByNick(loginRequest.username)
 			
-			assertCondition (cliente == null, "No existe usuario registrado")
-			assertCondition(loginRequest.password != cliente.password, "Contraseña incorrecta")
+			precondition (cliente != null, "No existe usuario registrado")
+			precondition(loginRequest.password == cliente.password, "Contraseña incorrecta")
 			
 			return ok()
     	]         
     }
     
-    def assertCondition(Boolean condicion, String error){
+    def precondition(Boolean condicion, String error){
     	if (!condicion){
     		throw new BusinessException(error)
     	}
@@ -119,11 +119,13 @@ class Server {
 	       	return bloque.apply
 			
 		} catch(BusinessException e) {
-			return badRequest(e.message)
+			return badRequest(e.toJson)
 		} catch(Exception e) { 
-			return internalServerError(e.toString)
+			return internalServerError(e.toJson)
 		}
 		
     }
+    
+ 
 
 }

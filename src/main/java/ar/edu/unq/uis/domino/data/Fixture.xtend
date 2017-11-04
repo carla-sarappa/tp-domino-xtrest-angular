@@ -68,7 +68,9 @@ class Fixture {
 		
 		
 		val carlaSarappa = repoCliente.createCliente("carla.sarappa","c@c.c", "Carla Sarappa")
+		carlaSarappa.setPassword("1111")
 		val gisele = repoCliente.createCliente("escobargisele","escobargisele@g.com", "Gisele Escobar")
+		gisele.setPassword("1111")
 		val fede = repoCliente.createCliente("fede11","fede@fede.c", "Fede")
 		val maria = repoCliente.createCliente("maria","maria@maria.com", "Maria Lopez")
 	
