@@ -14,7 +14,7 @@ class App {
 		Repositories.init
 		new Fixture().run
 
-        val server = XTRest.startInstance(9000, new DominoApi())
+        XTRest.startInstance(9000, new DominoApi())
        
     }
  }
