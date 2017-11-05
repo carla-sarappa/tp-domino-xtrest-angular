@@ -22,7 +22,7 @@ import ar.edu.unq.uis.domino.data.SignupRequest
  * Servidor RESTful implementado con XtRest.
  */
 @Controller
-class Server {
+class DominoApi {
     extension JSONUtils = new JSONUtils
     
     new() {    
@@ -140,5 +140,6 @@ class Server {
 			return ok()
     	]         
     }
+    
 
 }

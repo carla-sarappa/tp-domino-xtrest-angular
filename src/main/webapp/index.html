@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" ng-app="dominoApp">
+
+<head>
+    <meta charset="utf-8">
+    <title>TP Domino's Pizza</title>
+    <link rel="stylesheet" href="css/app.css"/>
+
+    <!-- JQUERY -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- ANGULAR  -->
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/angular-route/angular-route.min.js"></script>
+    <script src="node_modules/ui-router/release/angular-ui-router.js"></script>
+    <script src="node_modules/angular-resource/angular-resource.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>
+            Domino's
+            <small>AngularJS</small>
+        </h1>
+    </div>
+
+    <a ui-sref="login" ui-sref-active="active">Login</a>
+    <a ui-sref="menu" ui-sref-active="active">Menu</a>
+
+
+    <ui-view>
+
+    </ui-view>
+
+</div>
+
+<!-- nuestro jscript -->
+<script src="js/models.js"></script>
+<script src="js/app.js"></script>
+<script src="js/services.js"></script>
+<script src="login/login.js"></script>
+<script src="login/service.js"></script>
+<script src="usuario/usuario.js"></script>
+<script src="menu/menu.js"></script>
+<script src="tamanio/tamanio.js"></script>
+<script src="pedido/pedido.js"></script>
+
+</body>
+</html>
+

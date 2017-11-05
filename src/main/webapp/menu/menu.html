@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Menú</title>
+    </head>
+    <body>
+        <h3>Elige tu pizza ideal</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-condensed example-animate-container">
+                <tbody>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                </tr>
+                <tr data-ng-repeat="promo in promos" class="animate-repeat">
+                    <td class="col-xs-1">{{promo.nombre}}</td>
+                    <td class="col-xs-5">{{promo.precio}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
