@@ -1,17 +1,17 @@
-app.controller('MenuCtrl', function($resource, $timeout, $scope, Promos) {
+app.controller('ExtrasCtrl', function($resource, $timeout, $scope, Extras) {
     'use strict';
 
-    $scope.promos = [];
+    $scope.extras = [];
 
     function errorHandler(error) {
         console.log(error.data);
     }
 
     $scope.actualizarLista = function() {
-        Promos.query()
+        Extras.query()
             .then(function(data) {
                 console.log(data);
-                $scope.promos = data;
+                $scope.extras = data;
             })
             .catch(errorHandler);
     };
@@ -19,12 +19,12 @@ app.controller('MenuCtrl', function($resource, $timeout, $scope, Promos) {
     $scope.actualizarLista();
 
 })
-    .directive('promos', function() {
+    .directive('extras', function() {
         return {
             template: '<div class="list-group">\n' +
-            '  <a href="/tamanio.html" class="list-group-item ">\n' +
-            '    <h4 class="list-group-item-heading">{{promo.nombre}}</h4>\n' +
-            '    <p class="list-group-item-text">{{promo.ingredientesAsString()}}</p> <span class="badge">{{promo.precio}}</span><button type="button" class="btn btn-default btn-lg">\n' +
+            '  <a href="#" class="list-group-item ">\n' +
+            '    <h4 class="list-group-item-heading">{{extra.nombre}}</h4>\n' +
+            '    <p class="list-group-item-text">{{extra.nombre}}</p> <span class="badge">{{extra.precio}}</span><button type="button" class="btn btn-default btn-lg">\n' +
             '  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>\n' +
             '</button>\n' +
             '  </a>\n' +

@@ -11,5 +11,14 @@ app.config(function($stateProvider) {
         controller: 'MenuCtrl'
     });
 
+    $stateProvider.state('tamanio', {
+        templateUrl: 'tamanio/tamanio.html',
+        controller: 'TamanioCtrl'
+    });
+
+    $stateProvider.state('extras', {
+        templateUrl: 'extras/extras.html',
+        controller: 'ExtrasCtrl'
+    });
 });
 

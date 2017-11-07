@@ -9,3 +9,11 @@ function Pizza(json) {
         return s;
     }
 }
+
+function Tamanio(json){
+    angular.extend(this, json);
+}
+
+function Ingrediente(json){
+    angular.extend(this, json);
+}
