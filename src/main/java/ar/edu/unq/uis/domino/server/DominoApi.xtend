@@ -17,6 +17,7 @@ import ar.edu.unq.uis.domino.exceptions.BusinessException
 import javax.servlet.http.HttpServletResponse
 import org.uqbar.xtrest.api.Result
 import ar.edu.unq.uis.domino.data.SignupRequest
+import org.uqbar.xtrest.api.annotation.Put
 
 /**
  * Servidor RESTful implementado con XtRest.
@@ -80,6 +81,16 @@ class DominoApi {
         
     }
     
+    @Get("/pedidos")
+    def getPedidos(){
+    		
+    	execute(response)[     	
+		    val cliente = Repositories.clientes.searchById(Integer.parseInt(request.getParameter("userId")))
+	    	
+	    	return ok(Repositories.pedidos.historial(cliente).map[PedidoRequest.from(it)].toJson)]
+	        
+    }
+    
     @Get("/pedidos/:id")
     def getPedido() {
         response.contentType = ContentType.APPLICATION_JSON
@@ -141,5 +152,27 @@ class DominoApi {
     	]         
     }
     
+    @Get("/usuarios/:id")
+    def getUsuario(){
+    	execute(response)[
+        	val cliente = Repositories.clientes.searchById(Integer.parseInt(id))
+			return ok(cliente.toJson)
+    	]  
+    }
+    
+    @Put("/usuarios/:id")
+    def editarUsuario(@Body String body){
+    	execute(response)[
+    		val signupRequest = body.fromJson(SignupRequest)
+    		
+        	val cliente = Repositories.clientes.searchById(Integer.parseInt(id))
+        	cliente.setNombre(signupRequest.nombre)
+        	precondition (Repositories.clientes.findByEmail(signupRequest.email) == null, "Ya existe usuario registrado con ese email")
+        	cliente.setEmail(signupRequest.email)
+        	cliente.setDireccion(signupRequest.direccion)
+        	
+        	return ok(cliente.toJson)
+    	]
+    }
 
 }
