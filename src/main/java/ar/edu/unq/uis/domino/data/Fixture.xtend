@@ -23,6 +23,7 @@ import ar.edu.unq.uis.domino.model.GmailSender
 import java.util.Date
 import ar.edu.unq.uis.domino.model.Cancelado
 import ar.edu.unq.uis.domino.model.Entregado
+import ar.edu.unq.uis.domino.model.IngredienteDistribuido
 
 class Fixture {
 	def run() {
@@ -40,8 +41,8 @@ class Fixture {
 			createPromo("Anana", 35.0)
 		]
 		
-		
 		val repoIngredientes = ApplicationContext.instance.getSingleton(typeof(Ingrediente)) as RepoIngredientes
+		val aceitunas = repoIngredientes.createIngrediente("Aceitunas", 5.0)
 		
 		repoIngredientes => [
 			createIngrediente("Tomate seco", 1.0)
@@ -52,6 +53,7 @@ class Fixture {
 			createIngrediente("Salame rodajas", 1.0)
 		]
 		
+		
 		val repoDistribucion = ApplicationContext.instance.getSingleton(typeof(Distribucion)) as RepoDistribucion
 		
 		repoDistribucion => [
@@ -59,6 +61,16 @@ class Fixture {
 			createDistribucion("Mitad izquierda")
 			createDistribucion("Mitad derecha")
 		]
+		
+		val aceitunasDistrib = new IngredienteDistribuido(aceitunas, new Distribucion("Toda la pizza"))
+		val anchoas = new Ingrediente("Anchoas", 22.0)
+		val anchoasDistrib = new IngredienteDistribuido(anchoas, new Distribucion("Toda la pizza"))
+		calabresa.agregarIngrediente(aceitunasDistrib)
+		calabresa.agregarIngrediente(anchoasDistrib)
+		napolitana.agregarIngrediente(aceitunasDistrib)
+		margherita.agregarIngrediente(aceitunasDistrib)
+		cuatroQuesos.agregarIngrediente(aceitunasDistrib)		
+		
 		
 		val repoCliente = ApplicationContext.instance.getSingleton(typeof(Cliente)) as RepoCliente
 		repoCliente => [
