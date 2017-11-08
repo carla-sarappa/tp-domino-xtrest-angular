@@ -39,16 +39,17 @@ app.controller('ExtrasCtrl', function($resource, $timeout, $scope, $state, Extra
             template: '<div><a href="#" ng-click="selectExtra(extra)"><p><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {{extra.nombre}} <span class="badge">{{extra.precio}}</span></p></a></div>'
         }
     })
-    .directive('distribucion', function (elem, attr) {
-        return{
-            template: '<span><input type="radio" name="distribuciones" ng-model="ingrediente.distribucion"\n' +
-            '                         value="'+ attr.nombre +'"\n' +
-            '                         ng-disabled="!ingrediente.isExtra && ingrediente.distribucion != \'' +
-            attr.nombre +
-            '\'"\n' +
-            '                         ng-checked="ingrediente.distribucion == \''+ attr.nombre +'\'">\n' +
-            '                '+ attr.nombre +'\n' +
-            '            </span>'
+    .directive('distribucion', function ($compile) {
+        return function ($scope, element, attrs) {
+                var html =  '<span><input type="radio" name="distribuciones" ng-model="ingrediente.distribucion"\n' +
+                    '                         value="'+ attrs.nombre +'"\n' +
+                    '                         ng-disabled="!ingrediente.isExtra && ingrediente.distribucion != \'' +
+                    attrs.nombre +
+                    '\'"\n' +
+                    '                         ng-checked="ingrediente.distribucion == \''+ attrs.nombre +'\'">\n' +
+                    '                '+ attrs.nombre +'\n' +
+                    '            </span>';
+                element.replaceWith($compile(html)($scope));
         }
     })
 ;
