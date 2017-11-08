@@ -30,10 +30,23 @@ app.controller('ExtrasCtrl', function($resource, $timeout, $scope, $state, Extra
         var index = $scope.$parent.extrasSeleccionados.indexOf(extra);
         $scope.$parent.extrasSeleccionados.splice(index, 1);
         console.log($scope.$parent.extrasSeleccionados);
-    }
+    };
 
     $scope.continuar = function(){
         $state.go('pedido');
+    };
+
+    var sumarExtras = function(){
+        return $scope.$parent.extrasSeleccionados.map(function (extra) {
+            return extra.ingrediente.precio
+        }).reduce(function (a, b) {
+            return a+b;
+        }, 0)
+    };
+
+    $scope.subtotal = function () {
+        return ($scope.$parent.promoSeleccionada.precio * $scope.$parent.tamanioSeleccionado.factor)
+            + sumarExtras();
     };
 
 })
