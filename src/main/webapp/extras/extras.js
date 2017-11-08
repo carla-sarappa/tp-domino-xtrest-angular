@@ -3,12 +3,11 @@ app.controller('ExtrasCtrl', function($resource, $timeout, $scope, $state, Extra
 
     $scope.extras = [];
     $scope.distribuciones = ["Mitad izquierda", "Toda la pizza", "Mitad derecha"];
-    $scope.$parent.extrasSeleccionados = [];
 
 
     function errorHandler(error) {
         console.log(error.data);
-    }
+    };
 
     $scope.actualizarLista = function() {
         Extras.query()
@@ -22,31 +21,19 @@ app.controller('ExtrasCtrl', function($resource, $timeout, $scope, $state, Extra
     $scope.actualizarLista();
 
     $scope.selectExtra = function(extra){
-        $scope.$parent.extrasSeleccionados.push(new IngredienteDistribuido(extra, true));
-        console.log($scope.$parent.extrasSeleccionados);
+        $scope.$parent.plato.extras.push(new IngredienteDistribuido(extra, true));
+        console.log($scope.$parent.plato.extras);
     };
 
     $scope.quitarExtra = function (extra) {
-        var index = $scope.$parent.extrasSeleccionados.indexOf(extra);
-        $scope.$parent.extrasSeleccionados.splice(index, 1);
-        console.log($scope.$parent.extrasSeleccionados);
+        var index = $scope.$parent.plato.extras.indexOf(extra);
+        $scope.$parent.plato.extras.splice(index, 1);
+        console.log($scope.$parent.plato.extras);
     };
 
     $scope.continuar = function(){
+        $scope.$parent.pedido.platos.push($scope.$parent.plato);
         $state.go('pedido');
-    };
-
-    var sumarExtras = function(){
-        return $scope.$parent.extrasSeleccionados.map(function (extra) {
-            return extra.ingrediente.precio
-        }).reduce(function (a, b) {
-            return a+b;
-        }, 0)
-    };
-
-    $scope.subtotal = function () {
-        return ($scope.$parent.promoSeleccionada.precio * $scope.$parent.tamanioSeleccionado.factor)
-            + sumarExtras();
     };
 
 })

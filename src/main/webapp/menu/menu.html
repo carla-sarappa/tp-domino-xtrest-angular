@@ -5,13 +5,9 @@
         <title>Menú</title>
     </head>
     <body>
-        <ol class="breadcrumb">
-            <li><a href="#">Menu</a></li>
-            <li><a href="#">Pizza</a></li>
-            <li class="active">Data</li>
-        </ol>
+
         <h2>Elige tu pizza ideal</h2>
-        <div promos data-ng-repeat="promo in promos" ng-click="selectPromo(promo)" class="animate-repeat">
+        <div promos data-ng-repeat="plato in platos" ng-click="selectPromo(plato)" class="animate-repeat">
         </div>
     </body>
 </html>

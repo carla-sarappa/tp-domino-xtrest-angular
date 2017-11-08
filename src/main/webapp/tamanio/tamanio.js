@@ -2,14 +2,13 @@ app.controller('TamanioCtrl', function($resource, $timeout, $scope, $state, Tama
     'use strict';
 
     $scope.tamanios = [];
-    console.log("TamanioCtrl", $scope.$parent.sarasa);
 
     function errorHandler(error) {
         console.log(error.data);
     }
 
     $scope.selectTamanio = function(tamanio){
-        $scope.$parent.tamanioSeleccionado = tamanio;
+        $scope.$parent.plato.tamanio= tamanio;
         $state.go('extras');
     };
 
@@ -31,7 +30,7 @@ app.controller('TamanioCtrl', function($resource, $timeout, $scope, $state, Tama
             template: '<div class="list-group">\n' +
             '  <a href="#" class="list-group-item ">\n' +
             '    <h4 class="list-group-item-heading">{{tamanio.nombre}}</h4>\n' +
-            '    <span class="badge">{{promoSeleccionada.precio * tamanio.factor}}</span><button type="button" class="btn btn-default btn-lg">\n' +
+            '    <span class="badge">{{plato.promo.precio * tamanio.factor}}</span><button type="button" class="btn btn-default btn-lg">\n' +
             '  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>\n' +
             '</button>\n' +
             '  </a>\n' +

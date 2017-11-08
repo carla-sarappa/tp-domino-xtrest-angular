@@ -6,7 +6,11 @@
     </head>
     <body>
 
-    <h2>{{promoSeleccionada.nombre}}</h2>
+    <ol class="breadcrumb">
+        <li>Tamaño</li>
+    </ol>
+
+    <h2>{{plato.promo.nombre}}</h2>
         <div tamanios data-ng-repeat="tamanio in tamanios" ng-click="selectTamanio(tamanio)" class="animate-repeat">
         </div>
     </body>

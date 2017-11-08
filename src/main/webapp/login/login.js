@@ -8,7 +8,9 @@ app.controller('LoginCtrl', function($resource, $timeout, $scope, $state, LoginS
             $scope.loginRequest,
             function(response){
                 $state.go('menu');
-                $scope.$parent.cliente = new Cliente(response.data) ;
+                var cliente = new Cliente(response.data);
+                $scope.$parent.cliente = cliente ;
+                $scope.$parent.pedido.cliente = cliente.id;
 
             },
             function (response) {

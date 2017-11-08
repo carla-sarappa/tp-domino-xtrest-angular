@@ -10,7 +10,7 @@ import ar.edu.unq.uis.domino.model.Pedido
 
 class PlatoRequest {
 	Integer promo
-	List<IngredienteDistribuidoRequest> ingredientes
+	List<IngredienteDistribuidoRequest> extras
 	String tamanio
 	
 	new() {}
@@ -18,7 +18,7 @@ class PlatoRequest {
 	static def from(Plato plato){
 		val platoRequest = new PlatoRequest()
 		platoRequest.promo = plato.pizzaBase.id
-		platoRequest.ingredientes = plato.ingredientes.map[new IngredienteDistribuidoRequest(it)]
+		platoRequest.extras = plato.ingredientes.map[new IngredienteDistribuidoRequest(it)]
 		platoRequest.tamanio = plato.tamanio.nombre
 		platoRequest
 	}
@@ -39,7 +39,7 @@ class PlatoRequest {
 	def createPlato(Pedido pedido){
 		val plato = new Plato(getPizza, getTamanio, pedido)	
 			
-		ingredientes.map[it.ingredienteDistribuido].forEach[ plato.agregarExtra(it) ] 
+		extras.map[it.ingredienteDistribuido].forEach[ plato.agregarExtra(it) ] 
 		return plato
 	}
 }

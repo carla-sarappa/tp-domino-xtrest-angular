@@ -4,14 +4,6 @@ function Pizza(json) {
     });
 
     angular.extend(this, json);
-
-    this.ingredientesAsString = function(){
-        var s;
-        for(var i = 0; i<this.ingredientes.length ; i++){
-            s = (s?(s + ", "):"") + this.ingredientes[i].ingrediente.nombre;
-        }
-        return s;
-    }
 }
 
 function Tamanio(json){
@@ -28,6 +20,43 @@ function IngredienteDistribuido(ingrediente, isExtra){
     this.isExtra = isExtra;
 }
 
+function Pedido(){
+    this.platos = [];
+    this.cliente = {};
+    this.aclaraciones = '';
+    this.envio = '';
+
+}
+
+function Plato(pizza){
+    this.promo = pizza;
+    this.extras = [];
+    this.tamanio = { factor:1 };
+
+    this.sumarExtras = function(){
+        return this.extras.map(function (extra) {
+            return extra.ingrediente.precio
+        }).reduce(function (a, b) {
+            return a+b;
+        }, 0)
+    };
+
+    this.precio = function () {
+        return (this.promo.precio * this.tamanio.factor)
+            + this.sumarExtras();
+    };
+
+    this.ingredientesAsString = function () {
+        var all = this.promo.ingredientes.concat(this.extras);
+        var s;
+        var length = all.length;
+        for(var i = 0; i<length ; i++){
+            console.log("Ingrediente: ", all[i].ingrediente);
+            s = (s?(s + ( i === length-1? " y " : ", ")):"") + all[i].ingrediente.nombre;
+        }
+        return s;
+    }
+}
 
 function Cliente(json){
     angular.extend(this, json);

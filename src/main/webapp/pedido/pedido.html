@@ -2,9 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Pedido</title>
 </head>
 <body>
+
+<ol class="breadcrumb">
+    <li>Tamaño</li>
+    <li>Ingredientes</li>
+    <li>Confirmar</li>
+</ol>
+    <h2>Pedido</h2>
+    <h3>Pizzas</h3>
+    <div promos data-ng-repeat="plato in pedido.platos" ng-click="selectPromo(plato)" class="animate-repeat">
+
+    <h3>Aclaraciones</h3>
+    <textarea class="form-control" rows="3"></textarea>
+
+    <h3>Envio</h3>
+
+    <label><input type="radio" name="envio" value="envio"> Retiro por el local</label>
+    <label><input type="radio" name="envio" value="envio"> Envio</label>
+    <span class="badge">{{total()}}</span>
+    <input type="text" class="form-control" id="exampleInputName2" placeholder="Direccion">
+
+    <h2>Total a pagar:</h2>     <span class="badge">{{total()}}</span>
+
+
+    <button type="button" class="btn btn-info pull-right" ng-click="continuar()">Confirmar pedido</button>
 
 </body>
 </html>
