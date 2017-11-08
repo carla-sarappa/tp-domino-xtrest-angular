@@ -26,6 +26,16 @@ function Pedido(){
     this.aclaraciones = '';
     this.envio = '';
 
+    this.total = function(){
+        return this.platos.map(function (plato) {
+            return plato.precio()
+        }).reduce(sumar, 0)
+    };
+
+}
+
+function sumar(a, b) {
+    return a+b;
 }
 
 function Plato(pizza){
@@ -36,9 +46,7 @@ function Plato(pizza){
     this.sumarExtras = function(){
         return this.extras.map(function (extra) {
             return extra.ingrediente.precio
-        }).reduce(function (a, b) {
-            return a+b;
-        }, 0)
+        }).reduce(sumar, 0)
     };
 
     this.precio = function () {

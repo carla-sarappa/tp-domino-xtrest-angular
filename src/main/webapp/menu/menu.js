@@ -2,8 +2,9 @@ app.controller('MenuCtrl', function($resource, $timeout, $scope, $state, Promos)
     'use strict';
 
     $scope.platos = [];
-    $scope.$parent.pedido = new Pedido();
-
+    if (!$scope.$parent.pedido){
+        $scope.$parent.pedido = new Pedido();
+    }
 
     $scope.$parent.agregarNuevoPlato = function () {
         $scope.$parent.plato = new Plato();
@@ -23,6 +24,12 @@ app.controller('MenuCtrl', function($resource, $timeout, $scope, $state, Promos)
             .then(function(data) {
                 console.log(data);
                 $scope.platos = data;
+                $scope.platos.push(new Plato(new Pizza({
+                    nombre:'Armá tu pizza',
+                    precio: 70,
+                    ingredientes: [],
+                    descripcion: 'Con los ingredientes que más te gusten'
+                })))
             })
             .catch(errorHandler);
     };
