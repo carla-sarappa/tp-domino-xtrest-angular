@@ -17,12 +17,15 @@
 
             </ingredientes>
         </div>
-        <div class="panel panel-success col-md-4">
-            <div class="panel-heading">Extras</div>
-            <div class="panel-body">
-                <div extras data-ng-repeat="extra in extras" class="animate-repeat">
+        <div class="col-md-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">Extras</div>
+                <div class="panel-body">
+                    <div extras data-ng-repeat="extra in extras" class="animate-repeat">
+                    </div>
                 </div>
             </div>
+            <button type="button" class="btn btn-info pull-right" ng-click="continuar()">Continuar</button>
         </div>
     </div>
 </body>

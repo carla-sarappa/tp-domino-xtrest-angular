@@ -1,11 +1,15 @@
 <div class="list-group">
     <form class="list-group-item " ng-class="ingrediente.isExtra ? '' : 'disabled'">
         <h4 class="list-group-item-heading">{{ingrediente.ingrediente.nombre}} </h4>
+        <button ng-show="ingrediente.isExtra" ng-click="quitarExtra(ingrediente)" type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
         <form>
             <div distribucion data-nombre="Mitad izquierda"></div>
             <div distribucion data-nombre="Toda la pizza"></div>
             <div distribucion data-nombre="Mitad derecha"></div>
 
         </form>
+    </form>
 </div>
 

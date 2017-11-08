@@ -26,6 +26,15 @@ app.controller('ExtrasCtrl', function($resource, $timeout, $scope, $state, Extra
         console.log($scope.$parent.extrasSeleccionados);
     };
 
+    $scope.quitarExtra = function (extra) {
+        var index = $scope.$parent.extrasSeleccionados.indexOf(extra);
+        $scope.$parent.extrasSeleccionados.splice(index, 1);
+        console.log($scope.$parent.extrasSeleccionados);
+    }
+
+    $scope.continuar = function(){
+        $state.go('pedido');
+    };
 
 })
     .directive('ingredientes', function() {
