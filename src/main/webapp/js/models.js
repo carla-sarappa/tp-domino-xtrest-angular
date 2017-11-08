@@ -24,13 +24,30 @@ function Pedido(){
     this.platos = [];
     this.cliente = {};
     this.aclaraciones = '';
-    this.envio = '';
+
+    this.conEnvio = function (dir) {
+        this.envio = {
+            nombre:'delivery',
+            direccion: dir,
+            costo: 15
+        };
+    };
+
+    this.retiraPorLocal = function () {
+        this.envio = {
+            nombre:'retira por el local',
+            costo: 0.0
+        };
+    };
 
     this.total = function(){
         return this.platos.map(function (plato) {
             return plato.precio()
         }).reduce(sumar, 0)
+        + this.envio.costo;
     };
+
+    this.retiraPorLocal();
 
 }
 

@@ -1,14 +1,14 @@
 app.controller('PedidoCtrl', function($resource, $timeout, $scope, $state) {
     'use strict';
 
-    $scope.pedidos = [];
+    $scope.direccion = '';
 
     function errorHandler(error) {
         console.log(error.data);
     }
 
-    $scope.sendPedido = function(promo){
-
+    $scope.confirmarPedido = function(){
+        console.log($scope.$parent.pedido)
     };
 
 });

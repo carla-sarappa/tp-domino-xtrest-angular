@@ -19,19 +19,20 @@
             <p><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar otra pizza</p></a></div>
 
     <h3>Aclaraciones</h3>
-    <textarea class="form-control" rows="3"></textarea>
+    <textarea class="form-control" rows="3" ng-model="pedido.aclaraciones" ></textarea>
 
     <h3>Envio</h3>
-
-    <label><input type="radio" name="envio" value="envio"> Retiro por el local</label>
-    <label><input type="radio" name="envio" value="envio"> Envio</label>
-    <span class="badge">{{envio()}}</span>
-    <input type="text" class="form-control" id="exampleInputName2" placeholder="Direccion">
-
+    <form>
+        <label><input checked type="radio" name="envio" value="retiraPorLocal" ng-click="pedido.retiraPorLocal()"> Retiro por el local</label>
+        <br/>
+        <label><input type="radio" name="envio" value="delivery" ng-click="pedido.conEnvio(direccion)"> Envio</label>
+        <span class="badge">15</span>
+        <input type="text" class="form-control" ng-model="direccion" placeholder="Direccion">
+    </form>
     <h2>Total a pagar:</h2>     <span class="badge">{{pedido.total()}}</span>
 
 
-    <button type="button" class="btn btn-info pull-right" ng-click="continuar()">Confirmar pedido</button>
+    <button type="button" class="btn btn-info pull-right" ng-click="confirmarPedido()">Confirmar pedido</button>
 
 </body>
 </html>
