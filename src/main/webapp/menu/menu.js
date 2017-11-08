@@ -1,11 +1,17 @@
-app.controller('MenuCtrl', function($resource, $timeout, $scope, Promos) {
+app.controller('MenuCtrl', function($resource, $timeout, $scope, $state, Promos) {
     'use strict';
 
     $scope.promos = [];
+    $scope.$parent.sarasa = "Hola";
 
     function errorHandler(error) {
         console.log(error.data);
     }
+
+    $scope.selectPromo = function(promo){
+        $scope.$parent.promoSeleccionada = promo;
+        $state.go('tamanio');
+    };
 
     $scope.actualizarLista = function() {
         Promos.query()
@@ -21,14 +27,7 @@ app.controller('MenuCtrl', function($resource, $timeout, $scope, Promos) {
 })
     .directive('promos', function() {
         return {
-            template: '<div class="list-group">\n' +
-            '  <a href="/tamanio.html" class="list-group-item ">\n' +
-            '    <h4 class="list-group-item-heading">{{promo.nombre}}</h4>\n' +
-            '    <p class="list-group-item-text">{{promo.ingredientesAsString()}}</p> <span class="badge">{{promo.precio}}</span><button type="button" class="btn btn-default btn-lg">\n' +
-            '  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>\n' +
-            '</button>\n' +
-            '  </a>\n' +
-            '</div>'
+            templateUrl: 'menu/promoTemplate.html'
         }
     })
 ;

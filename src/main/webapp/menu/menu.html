@@ -11,7 +11,7 @@
             <li class="active">Data</li>
         </ol>
         <h2>Elige tu pizza ideal</h2>
-        <div promos data-ng-repeat="promo in promos" class="animate-repeat">
+        <div promos data-ng-repeat="promo in promos" ng-click="selectPromo(promo)" class="animate-repeat">
         </div>
     </body>
 </html>

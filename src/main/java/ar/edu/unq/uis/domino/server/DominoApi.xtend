@@ -115,7 +115,7 @@ class DominoApi {
 			precondition (cliente != null, "No existe usuario registrado")
 			precondition(loginRequest.password == cliente.password, "Contraseña incorrecta")
 			
-			return ok()
+			return ok(cliente.toJson)
     	]         
     }
     

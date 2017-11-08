@@ -6,8 +6,8 @@
     </head>
     <body>
 
-    <h2>Tamaño</h2>
-        <div tamanios data-ng-repeat="tamanio in tamanios" class="animate-repeat">
+    <h2>{{promoSeleccionada.nombre}}</h2>
+        <div tamanios data-ng-repeat="tamanio in tamanios" ng-click="selectTamanio(tamanio)" class="animate-repeat">
         </div>
     </body>
 </html>

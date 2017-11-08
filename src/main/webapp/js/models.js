@@ -1,4 +1,8 @@
 function Pizza(json) {
+    json.ingredientes = json.ingredientes.map(function (ingrediente) {
+        return {ingrediente: ingrediente.ingrediente, distribucion: ingrediente.distribucion.nombre};
+    });
+
     angular.extend(this, json);
 
     this.ingredientesAsString = function(){
@@ -15,5 +19,16 @@ function Tamanio(json){
 }
 
 function Ingrediente(json){
+    angular.extend(this, json);
+}
+
+function IngredienteDistribuido(ingrediente, isExtra){
+    this.ingrediente = ingrediente;
+    this.distribucion = "Toda la pizza";
+    this.isExtra = isExtra;
+}
+
+
+function Cliente(json){
     angular.extend(this, json);
 }

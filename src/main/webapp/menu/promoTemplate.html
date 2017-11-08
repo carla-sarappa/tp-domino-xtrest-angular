@@ -1,0 +1,10 @@
+<div class="list-group" >
+    <a href="#" ng-class="promoSeleccionada == promo ? 'list-group-item active' : 'list-group-item' ">
+        <h4 class="list-group-item-heading">{{promo.nombre}}</h4>
+        <p class="list-group-item-text">{{promo.ingredientesAsString()}}</p>
+        <span class="badge">{{promo.precio}}</span>
+        <button type="button" class="btn btn-default btn-lg">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        </button>
+    </a>
+</div>

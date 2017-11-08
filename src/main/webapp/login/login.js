@@ -2,11 +2,14 @@ app.controller('LoginCtrl', function($resource, $timeout, $scope, $state, LoginS
 
     $scope.loginRequest = {username: '', password: ''};
 
+
     $scope.login = function(){
         LoginService.login(
             $scope.loginRequest,
-            function(){
+            function(response){
                 $state.go('menu');
+                $scope.$parent.cliente = new Cliente(response.data) ;
+
             },
             function (response) {
                 $scope.loginError.message = response.data.message;

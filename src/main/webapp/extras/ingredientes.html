@@ -1,0 +1,29 @@
+<div class="list-group">
+    <form class="list-group-item " ng-class="ingrediente.isExtra ? '' : 'disabled'">
+        <h4 class="list-group-item-heading">{{ingrediente.ingrediente.nombre}} </h4>
+        <form>
+            <distribucion nombre="Mitad izquierda"></distribucion>
+            <distribucion nombre="Toda la pizza"></distribucion>
+            <distribucion nombre="Mitad derecha"></distribucion>
+            <span><input type="radio" name="distribuciones" ng-model="ingrediente.distribucion"
+                         value="Mitad izquierda"
+                         ng-disabled="!ingrediente.isExtra && ingrediente.distribucion != 'Mitad izquierda'"
+                         ng-checked="ingrediente.distribucion == 'Mitad izquierda'">
+                Mitad izquierda
+            </span>
+            <span>
+                    <input type="radio" name="distribuciones" ng-model="ingrediente.distribucion"
+                           value="Toda la pizza"
+                           ng-disabled="!ingrediente.isExtra && ingrediente.distribucion != 'Toda la pizza'"
+                           ng-checked="ingrediente.distribucion == 'Toda la pizza'">
+                     Toda la pizza</span>
+            <span>
+                    <input type="radio" name="distribuciones" ng-model="ingrediente.distribucion"
+                           value="Mitad derecha"
+                           ng-disabled="!ingrediente.isExtra && ingrediente.distribucion != 'Mitad derecha'"
+                           ng-checked="ingrediente.distribucion == 'Mitad derecha'">
+                        Mitad derecha
+                    </span>
+        </form>
+</div>
+
