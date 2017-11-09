@@ -32,7 +32,7 @@
             <small>AngularJS</small>
         </h1>
 
-        <h3><span class="label label-default">{{cliente.nick}}</span></h3>
+        <a ui-sref="usuario" ui-sref-active="active"><h2><span class="label label-default pull-right">{{cliente.nick}}</span></h2></a>
 
     </div>
 
@@ -40,6 +40,7 @@
     <a ui-sref="menu" ui-sref-active="active">Menu</a>
     <a ui-sref="tamanio" ui-sref-active="active">Tamaño</a>
     <a ui-sref="extras" ui-sref-active="active">Extras</a>
+    <a ui-sref="usuario" ui-sref-active="active">Usuario</a>
 
     <ui-view>
 
@@ -52,12 +53,12 @@
 <script src="js/app.js"></script>
 <script src="js/services.js"></script>
 <script src="login/login.js"></script>
-<script src="login/service.js"></script>
 <script src="usuario/usuario.js"></script>
 <script src="menu/menu.js"></script>
 <script src="tamanio/tamanio.js"></script>
 <script src="pedido/pedido.js"></script>
 <script src="extras/extras.js"></script>
+<script src="usuario/usuario.js"></script>
 
 </body>
 </html>

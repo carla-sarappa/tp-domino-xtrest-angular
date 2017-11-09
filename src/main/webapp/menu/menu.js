@@ -16,6 +16,7 @@ app.controller('MenuCtrl', function($resource, $timeout, $scope, $state, Promos)
 
     $scope.selectPromo = function(plato){
         $scope.$parent.plato = plato;
+        $scope.$parent.pedido.cliente = $scope.$parent.cliente;
         $state.go('tamanio');
     };
 

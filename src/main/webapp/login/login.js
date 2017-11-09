@@ -7,18 +7,15 @@ app.controller('LoginCtrl', function($resource, $timeout, $scope, $state, LoginS
         LoginService.login(
             $scope.loginRequest,
             function(response){
-                $state.go('menu');
                 var cliente = new Cliente(response.data);
+                console.log(cliente);
                 $scope.$parent.cliente = cliente ;
-                $scope.$parent.pedido.cliente = cliente.id;
-
+                $state.go('menu');
             },
             function (response) {
                 $scope.loginError.message = response.data.message;
             }
         );
-
-
     };
 
     $scope.signupRequest = {username: '', password: '', nombre: '', email: '', direccion: ''};
@@ -39,4 +36,19 @@ app.controller('LoginCtrl', function($resource, $timeout, $scope, $state, LoginS
 
     $scope.loginError = {};
     $scope.signupError = {};
+}).service('LoginService', function($http) {
+
+    var host = "http://localhost:9000/";
+
+    return {
+        login: function (loginRequest, cb, errorHandler) {
+            return $http.post(host + "login", loginRequest)
+                .then(cb, errorHandler);
+        },
+        signup: function (signupRequest, cb, errorHandler){
+            return $http.post(host + "usuarios", signupRequest)
+                .then(cb)
+                .catch(errorHandler);
+        }
+    }
 });
