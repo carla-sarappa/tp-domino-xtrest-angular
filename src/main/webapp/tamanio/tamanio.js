@@ -29,10 +29,10 @@ app.controller('TamanioCtrl', function($resource, $timeout, $scope, $state, Tama
         return {
             template: '<div class="list-group">\n' +
             '  <a href="#" class="list-group-item ">\n' +
-            '    <h4 class="list-group-item-heading">{{tamanio.nombre}}</h4>\n' +
-            '    <span class="badge">{{plato.promo.precio * tamanio.factor}}</span><button type="button" class="btn btn-default btn-lg">\n' +
+            '    <div class="row"><div class="col-md-10"><h4 class="list-group-item-heading">{{tamanio.nombre}}</h4></div>\n' +
+            '    <div class="col-md-1"><span class="badge dinero" >{{plato.pizza.precio * tamanio.factor}}</span></div><div class="col-md-1"><button type="button" class="btn btn-default btn-lg">\n' +
             '  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>\n' +
-            '</button>\n' +
+            '</button></div></div>\n' +
             '  </a>\n' +
             '</div>'
         }

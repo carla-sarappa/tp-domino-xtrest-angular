@@ -23,6 +23,7 @@ class FormaDeEnvioRequest {
 	def static from(FormaDeEnvio envio) {
 		val formaDeEnvioRequest = new FormaDeEnvioRequest
 		formaDeEnvioRequest.nombre = envio.class.simpleName.toLowerCase
+		formaDeEnvioRequest.direccion = envio.direccion
 		formaDeEnvioRequest
 	}
 	

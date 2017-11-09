@@ -1,6 +1,7 @@
+var getData = function(response) { return response.data };
+
 app.service('Tamanios', function($http) {
 
-    var getData = function(response) { return response.data };
     var transform = function(json) { return new Tamanio(json) };
 
     return {

@@ -59,8 +59,7 @@ class DominoApi {
     
     @Post("/pedidos")
     def postPedido(@Body String body) {
-       try {
-	       	response.contentType = ContentType.APPLICATION_JSON
+       execute(response)[
 	        
 	        val pedidoRequest = body.fromJson(PedidoRequest)
 	        val cliente = Repositories.clientes.searchById(pedidoRequest.cliente)
@@ -68,17 +67,13 @@ class DominoApi {
 	        val formaDeEnvio = pedidoRequest.formaDeEnvio.createFormaDeEnvio()
 	        
 	        val pedido = Repositories.pedidos.createPedido(cliente, formaDeEnvio)
-			val platos = pedidoRequest.platos.map[
-				val plato = it.createPlato(pedido)
-				Repositories.platos.create(plato)
-				plato
-			]
+
+			pedidoRequest.platos
+				.map[it.createPlato(pedido)]
+				.forEach [ Repositories.platos.create(it) ]
 			
-			return ok()
-		} catch(Exception e) { 
-			return badRequest(e.toString)
-		}
-        
+			return ok(PedidoRequest.from(pedido).toJson)
+		]
     }
     
     @Get("/pedidos")

@@ -13,6 +13,7 @@ class PedidoRequest {
 	Integer cliente
 	String aclaraciones
 	FormaDeEnvioRequest formaDeEnvio
+	Double monto
 	
 	new(){}
 	
@@ -22,7 +23,13 @@ class PedidoRequest {
 		request.cliente = pedido.cliente.id
 		request.aclaraciones = pedido.aclaraciones
 		request.formaDeEnvio = FormaDeEnvioRequest.from(pedido.formaDeEnvio)
+		request.monto = pedido.monto
 		request
+	}
+	
+	def populate(Pedido pedido) {
+		pedido.aclaraciones = this.aclaraciones
+		
 	}
 	
 }

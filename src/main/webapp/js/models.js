@@ -20,13 +20,20 @@ function IngredienteDistribuido(ingrediente, isExtra){
     this.isExtra = isExtra;
 }
 
+function pedidoFromJson(json) {
+    var pedido = new Pedido();
+    angular.extend(pedido, json);
+    console.log('PEDIDO: ', pedido);
+    return pedido;
+}
+
 function Pedido(){
     this.platos = [];
     this.cliente = {};
     this.aclaraciones = '';
 
     this.conEnvio = function (dir) {
-        this.envio = {
+        this.formaDeEnvio = {
             nombre:'delivery',
             direccion: dir,
             costo: 15
@@ -34,7 +41,7 @@ function Pedido(){
     };
 
     this.retiraPorLocal = function () {
-        this.envio = {
+        this.formaDeEnvio = {
             nombre:'retira por el local',
             costo: 0.0
         };
@@ -44,7 +51,7 @@ function Pedido(){
         return this.platos.map(function (plato) {
             return plato.precio()
         }).reduce(sumar, 0)
-        + this.envio.costo;
+        + this.formaDeEnvio.costo;
     };
 
     this.retiraPorLocal();
@@ -56,7 +63,7 @@ function sumar(a, b) {
 }
 
 function Plato(pizza){
-    this.promo = pizza;
+    this.pizza = pizza;
     this.extras = [];
     this.tamanio = { factor:1 };
 
@@ -67,19 +74,12 @@ function Plato(pizza){
     };
 
     this.precio = function () {
-        return (this.promo.precio * this.tamanio.factor)
+        return (this.pizza.precio * this.tamanio.factor)
             + this.sumarExtras();
     };
 
-    this.ingredientesAsString = function () {
-        var all = this.promo.ingredientes.concat(this.extras);
-        var s;
-        var length = all.length;
-        for(var i = 0; i<length ; i++){
-            console.log("Ingrediente: ", all[i].ingrediente);
-            s = (s?(s + ( i === length-1? " y " : ", ")):"") + all[i].ingrediente.nombre;
-        }
-        return s;
+    this.allIngredientes = function () {
+        return this.pizza.ingredientes.concat(this.extras);
     }
 }
 

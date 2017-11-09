@@ -12,7 +12,6 @@ app.controller('ExtrasCtrl', function($resource, $timeout, $scope, $state, Extra
     $scope.actualizarLista = function() {
         Extras.query()
             .then(function(data) {
-                console.log(data);
                 $scope.extras = data;
             })
             .catch(errorHandler);
@@ -45,7 +44,7 @@ app.controller('ExtrasCtrl', function($resource, $timeout, $scope, $state, Extra
     })
     .directive('extras', function() {
         return {
-            template: '<div><a href="#" ng-click="selectExtra(extra)"><p><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {{extra.nombre}} <span class="badge">{{extra.precio}}</span></p></a></div>'
+            template: '<div><a href="#" ng-click="selectExtra(extra)"><p><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {{extra.nombre}} <span class="badge dinero">{{extra.precio}}</span></p></a></div>'
         }
     })
     .directive('distribucion', function ($compile) {

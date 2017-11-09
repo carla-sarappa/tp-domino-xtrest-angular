@@ -7,9 +7,11 @@ import ar.edu.unq.uis.domino.repo.Repositories
 import ar.edu.unq.uis.domino.model.Tamanio
 import ar.edu.unq.uis.domino.model.Plato
 import ar.edu.unq.uis.domino.model.Pedido
+import org.eclipse.xtend.lib.annotations.Accessors
 
+@Accessors
 class PlatoRequest {
-	Integer promo
+	Integer pizza
 	List<IngredienteDistribuidoRequest> extras
 	String tamanio
 	
@@ -17,18 +19,18 @@ class PlatoRequest {
 	
 	static def from(Plato plato){
 		val platoRequest = new PlatoRequest()
-		platoRequest.promo = plato.pizzaBase.id
+		platoRequest.pizza = plato.pizzaBase.id
 		platoRequest.extras = plato.ingredientes.map[new IngredienteDistribuidoRequest(it)]
 		platoRequest.tamanio = plato.tamanio.nombre
 		platoRequest
 	}
 	
 	def getPizza(){
-		if (promo == null){
+		if (pizza == null){
 			PizzaFactory.construirPizzaCustom("custom")
 			
 		} else {
-			Repositories.pizzas.searchById(promo)
+			Repositories.pizzas.searchById(pizza)
 		}
 	}
 	
@@ -38,8 +40,10 @@ class PlatoRequest {
 		
 	def createPlato(Pedido pedido){
 		val plato = new Plato(getPizza, getTamanio, pedido)	
-			
-		extras.map[it.ingredienteDistribuido].forEach[ plato.agregarExtra(it) ] 
+		if (extras != null) {
+			extras.map[it.ingredienteDistribuido].forEach[ plato.agregarExtra(it) ] 
+		}	
+		
 		return plato
 	}
 }

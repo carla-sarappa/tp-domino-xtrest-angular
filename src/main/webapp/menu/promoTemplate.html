@@ -2,12 +2,12 @@
     <a href="#" class="list-group-item">
         <div class="row">
             <div class="col-md-10">
-                <h4 class="list-group-item-heading">{{plato.promo.nombre}}</h4>
-                <p class="list-group-item-text">{{plato.ingredientesAsString()}}</p>
-                <p ng-show="plato.promo.descripcion && plato.extras.length==0" class="list-group-item-text">{{plato.promo.descripcion}}</p>
+                <h4 class="list-group-item-heading">{{plato.pizza.nombre}}</h4>
+                <p class="list-group-item-text">{{plato.allIngredientes() | joinStringList:'ingrediente'}}</p>
+                <p ng-show="plato.pizza.descripcion && plato.extras.length==0" class="list-group-item-text">{{plato.pizza.descripcion}}</p>
             </div>
-            <div class="col-md-1">
-                <span class="badge">{{plato.precio()}}</span>
+            <div class="col-md-1 centrar-div">
+                <span class="badge dinero">{{plato.precio()}}</span>
             </div>
             <div class="col-md-1">
                 <button type="button" class="btn btn-default btn-lg">

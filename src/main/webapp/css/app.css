@@ -1,0 +1,24 @@
+.badge.dinero::before {
+    content: "$ ";
+}
+
+.badge.dinero {
+    background-color: red;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 14px;
+
+}
+
+.centrar-div{
+    display: flex;
+    align-self: center;
+}
+
+.badge.dinero.large {
+    font-size: large;
+}
+
+.row {
+    display: flex;
+}

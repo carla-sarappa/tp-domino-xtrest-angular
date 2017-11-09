@@ -15,7 +15,7 @@
     <div class="container-fluid">
         <h2>Pedido</h2>
         <h3>Pizzas</h3>
-        <div promos data-ng-repeat="plato in pedido.platos" ng-click="selectPromo(plato)" class="animate-repeat"></div>
+        <div promos data-ng-repeat="plato in pedido.platos" ng-click="deletePlato(plato)" class="animate-repeat"></div>
         <div>
             <a ui-sref="menu" ui-sref-active="active">
                 <p><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar otra pizza</p></a></div>
@@ -28,8 +28,8 @@
             <label><input checked type="radio" name="envio" value="retiraPorLocal" ng-click="pedido.retiraPorLocal()"> Retiro por el local</label>
             <br/>
             <label><input type="radio" name="envio" value="delivery" ng-click="pedido.conEnvio(direccion)"> Envio</label>
-            <span class="badge">15</span>
-            <input type="text" class="form-control" ng-model="direccion" placeholder="Direccion">
+            <span class="badge dinero">15</span>
+            <input type="text" class="form-control" ng-model="pedido.formaDeEnvio.direccion" placeholder="Direccion">
         </form>
 
         <div class="row">
@@ -37,7 +37,7 @@
                 <h2>Total a pagar:</h2>
             </div>
             <div class="col-md-2">
-                <span class="badge">{{pedido.total()}}</span>
+                <span class="badge dinero">{{pedido.total()}}</span>
             </div>
             <div class="col-md-1">
                 <button type="button" class="btn btn-info pull-right" ng-click="confirmarPedido()">Confirmar pedido</button>

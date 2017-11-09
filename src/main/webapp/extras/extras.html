@@ -10,12 +10,12 @@
     <li>Ingredientes</li>
 </ol>
 
-    <h2>{{plato.promo.nombre}}<small> {{plato.tamanio.nombre}}</small>
-        <span class="badge">{{plato.precio()}}</span></h2>
+    <h2>{{plato.pizza.nombre}}<small> {{plato.tamanio.nombre}}</small>
+        <span class="badge dinero">{{plato.precio()}}</span></h2>
 
     <div class="row">
         <div class="col-md-8">
-            <ingredientes data-ng-repeat="ingrediente in plato.promo.ingredientes" class="animate-repeat">
+            <ingredientes data-ng-repeat="ingrediente in plato.pizza.ingredientes" class="animate-repeat">
 
             </ingredientes>
             <ingredientes data-ng-repeat="ingrediente in plato.extras" class="animate-repeat">
