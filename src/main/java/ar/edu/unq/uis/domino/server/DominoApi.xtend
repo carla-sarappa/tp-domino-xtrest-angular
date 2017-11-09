@@ -32,29 +32,17 @@ class DominoApi {
 
     @Get("/promos")
     def getPromos() {
-        response.contentType = ContentType.APPLICATION_JSON
-        
-        val pizzas = Repositories.pizzas.allInstances
-        
-        return ok(pizzas.toJson)
+    	execute(response)[  ok(Repositories.pizzas.allInstances.toJson) ]
     }
     
     @Get("/tamanios")
     def getTamanios() {
-        response.contentType = ContentType.APPLICATION_JSON
-        
-        val tamanios = Tamanio.tamanios
-        
-        return ok(tamanios.toJson)
+        execute(response)[  ok(Tamanio.tamanios.toJson) ]
     }
     
     @Get("/ingredientes")
     def getIngredientes() {
-        response.contentType = ContentType.APPLICATION_JSON
-        
-        val ingredientes = Repositories.ingredientes.allInstances
-        
-        return ok(ingredientes.toJson)
+        execute(response)[  ok(Repositories.ingredientes.allInstances.toJson) ]
     }
     
     @Post("/pedidos")
@@ -62,7 +50,13 @@ class DominoApi {
        execute(response)[
 	        
 	        val pedidoRequest = body.fromJson(PedidoRequest)
-	        val cliente = Repositories.clientes.searchById(pedidoRequest.cliente)
+	        
+	        val cliente = if (pedidoRequest.cliente != null) { 
+	        		Repositories.clientes.searchById(pedidoRequest.cliente)
+	        		} else {
+	        			Repositories.clientes.findByNick("Invitado")
+	        		}
+	     
 	       
 	        val formaDeEnvio = pedidoRequest.formaDeEnvio.createFormaDeEnvio()
 	        
@@ -78,26 +72,28 @@ class DominoApi {
     
     @Get("/pedidos")
     def getPedidos(){
-    		
     	execute(response)[     	
-		    val cliente = Repositories.clientes.searchById(Integer.parseInt(request.getParameter("userId")))
-	    	
-	    	return ok(Repositories.pedidos.historial(cliente).map[PedidoRequest.from(it)].toJson)]
-	        
+    		try {
+    			val cliente = Repositories.clientes.searchById(Integer.parseInt(request.getParameter("userId")))
+	    		return ok(Repositories.pedidos.historial(cliente).map[PedidoRequest.from(it)].toJson)
+    		} catch(NumberFormatException e) {
+    			return ok([].toJson)
+    		}
+		]
     }
     
     @Get("/pedidos/:id")
     def getPedido() {
-        response.contentType = ContentType.APPLICATION_JSON
-
-        val pedido = Repositories.pedidos.searchById(Integer.parseInt(id))
-        
-        if (pedido == null) {
-            return notFound()
-        } else {
-        	val pedidoResponse = PedidoRequest.from(pedido)
-            return ok(pedidoResponse.toJson)
-        }
+        execute(response)[  
+	        val pedido = Repositories.pedidos.searchById(Integer.parseInt(id))
+	        
+	        if (pedido == null) {
+	            return notFound()
+	        } else {
+	        	val pedidoResponse = PedidoRequest.from(pedido)
+	            return ok(pedidoResponse.toJson)
+	        }
+        ]
     }
     
     @Post("/login")

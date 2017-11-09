@@ -2,6 +2,10 @@ app.controller('LoginCtrl', function($resource, $timeout, $scope, $state, LoginS
 
     $scope.loginRequest = {username: '', password: ''};
 
+    $scope.loginAsInvitado = function () {
+        $scope.$parent.cliente = new Cliente({nick: 'Invitado'});
+        $state.go('menu');
+    };
 
     $scope.login = function(){
         LoginService.login(

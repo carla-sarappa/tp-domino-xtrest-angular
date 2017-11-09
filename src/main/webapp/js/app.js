@@ -28,4 +28,7 @@ app.config(function($stateProvider) {
         templateUrl: 'usuario/usuario.html',
         controller: 'UsuarioCtrl'
     });
+}).run(function ($state) {
+    $state.go('login')
 });
+

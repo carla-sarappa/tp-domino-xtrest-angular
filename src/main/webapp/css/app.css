@@ -16,7 +16,8 @@
 }
 
 .badge.dinero.large {
-    font-size: large;
+    font-size: 28px;
+    padding: 8px;
 }
 
 .row {

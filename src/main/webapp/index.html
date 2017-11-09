@@ -32,15 +32,14 @@
             <small>AngularJS</small>
         </h1>
 
-        <a ui-sref="usuario" ui-sref-active="active"><h2><span class="label label-default pull-right">{{cliente.nick}}</span></h2></a>
+        <a ng-show="cliente" ui-sref="usuario" ui-sref-active="active"><h2><span class="label label-default pull-right">{{cliente.nick}}</span></h2></a>
 
     </div>
 
     <a ui-sref="login" ui-sref-active="active">Login</a>
-    <a ui-sref="menu" ui-sref-active="active">Menu</a>
+
     <a ui-sref="tamanio" ui-sref-active="active">Tamaño</a>
     <a ui-sref="extras" ui-sref-active="active">Extras</a>
-    <a ui-sref="usuario" ui-sref-active="active">Usuario</a>
 
     <ui-view>
 
