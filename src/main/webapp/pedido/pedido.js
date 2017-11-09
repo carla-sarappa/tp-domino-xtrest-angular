@@ -24,9 +24,6 @@ app.controller('PedidoCtrl', function($resource, $timeout, $scope, $state, Pedid
 
 }).service('Pedidos', function($http) {
     var getData = function(response) { return response.data };
-    var toPedido = function (json) {
-        return pedidoFromJson(json);
-    };
 
     return {
         crearPedido: function(pedido, cb, errorHandler) {
@@ -57,7 +54,7 @@ app.controller('PedidoCtrl', function($resource, $timeout, $scope, $state, Pedid
             return $http.get(HOST + "pedidos?userId=" + id)
                 .then(getData)
                 .then(function (pedidosJson) {
-                    return pedidosJson.map(toPedido)
+                    return pedidosJson.map(pedidoFromJson)
                 })
                 .then(cb)
                 .catch(errorHandler);

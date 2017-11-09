@@ -47,7 +47,7 @@
                 <td>{{pedido.platos | joinStringList:'pizza'}}</td>
                 <td>{{pedido.formaDeEnvio.direccion}}</td>
                 <td>{{pedido.monto}}</td>
-                <td><a href="#">Repetir</a></td>
+                <td><a href="#" ng-click="repetirPedido(pedido)">Repetir</a></td>
             </tr>
         </tbody>
     </table>

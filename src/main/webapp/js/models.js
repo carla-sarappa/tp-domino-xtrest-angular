@@ -23,6 +23,7 @@ function IngredienteDistribuido(ingrediente, isExtra){
 function pedidoFromJson(json) {
     var pedido = new Pedido();
     angular.extend(pedido, json);
+    pedido.platos = pedido.platos.map(platoFromJson);
     console.log('PEDIDO: ', pedido);
     return pedido;
 }
@@ -60,6 +61,17 @@ function Pedido(){
 
 function sumar(a, b) {
     return a+b;
+}
+
+function platoFromJson(json) {
+    var plato = new Plato();
+    angular.extend(plato, json);
+    plato.extras = plato.extras.map(function(e){
+        var extra = new IngredienteDistribuido(e.ingredienteDistribuido.ingrediente, true);
+        extra.distribucion = e.ingredienteDistribuido.distribucion.nombre;
+        return extra;
+    });
+    return plato;
 }
 
 function Plato(pizza){

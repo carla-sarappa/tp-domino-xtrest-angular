@@ -9,6 +9,7 @@ import ar.edu.unq.uis.domino.model.FormaDeEnvio
 class FormaDeEnvioRequest {
 	String nombre
 	String direccion
+	Double costo
 	
 	new(){}
 	
@@ -24,6 +25,7 @@ class FormaDeEnvioRequest {
 		val formaDeEnvioRequest = new FormaDeEnvioRequest
 		formaDeEnvioRequest.nombre = envio.class.simpleName.toLowerCase
 		formaDeEnvioRequest.direccion = envio.direccion
+		formaDeEnvioRequest.costo = envio.costoEnvio
 		formaDeEnvioRequest
 	}
 	

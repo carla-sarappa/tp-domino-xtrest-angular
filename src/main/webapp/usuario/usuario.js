@@ -27,6 +27,11 @@ app.controller('UsuarioCtrl', function($resource, $timeout, $scope, $state, Usua
 
     $scope.buscarHistorial();
 
+    $scope.repetirPedido = function (pedido) {
+        $scope.$parent.pedido = pedido;
+        $state.go('pedido');
+    }
+
 }).service('UsuarioService', function($http) {
     return {
         update: function (updatedUser, cb, errorHandler){
