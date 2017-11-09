@@ -2,26 +2,23 @@ app.controller('UsuarioCtrl', function($resource, $timeout, $scope, $state, Usua
     'use strict';
 
     $scope.historial = [];
+    $scope.error = {};
 
     function errorHandler(error) {
-        console.log(error.data);
+        $scope.error = error.data;
     }
 
     $scope.editarUsuario = function(){
         UsuarioService.update($scope.$parent.cliente, function () {
             console.log('Usuario actualizado');
-        },function () {
-            console.log('Error al actualizar el usuario');
-        });
+        }, errorHandler);
     };
 
     $scope.buscarHistorial = function () {
         Pedidos.historial($scope.$parent.cliente.id, function(pedidos){
             $scope.historial = pedidos;
             console.log(pedidos);
-        }, function () {
-            console.log("Error historial");
-        })
+        }, errorHandler)
 
     };
 
@@ -35,7 +32,7 @@ app.controller('UsuarioCtrl', function($resource, $timeout, $scope, $state, Usua
 }).service('UsuarioService', function($http) {
     return {
         update: function (updatedUser, cb, errorHandler){
-            return $http.put(HOST + "usuarios", updatedUser)
+            return $http.put(HOST + "usuarios/" + updatedUser.id, updatedUser)
                 .then(getData)
                 .then(cb)
                 .catch(errorHandler);

@@ -157,8 +157,11 @@ class DominoApi {
     		val signupRequest = body.fromJson(SignupRequest)
     		
         	val cliente = Repositories.clientes.searchById(Integer.parseInt(id))
+        	val clienteExistente = Repositories.clientes.findByEmail(signupRequest.email)
+        	
+        	precondition (clienteExistente == null || clienteExistente.id == cliente.id,  "Ya existe usuario registrado con ese email")
+        	
         	cliente.setNombre(signupRequest.nombre)
-        	precondition (Repositories.clientes.findByEmail(signupRequest.email) == null, "Ya existe usuario registrado con ese email")
         	cliente.setEmail(signupRequest.email)
         	cliente.setDireccion(signupRequest.direccion)
         	

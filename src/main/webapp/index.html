@@ -32,7 +32,10 @@
             <small>AngularJS</small>
         </h1>
 
-        <a ng-show="cliente" ui-sref="usuario" ui-sref-active="active"><h2><span class="label label-default pull-right">{{cliente.nick}}</span></h2></a>
+        <ul ng-show="cliente" class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a ui-sref="menu">Menu</a></li>
+            <li role="presentation"><a ui-sref="usuario">{{cliente.nick}}</a></li>
+        </ul>
 
     </div>
 
