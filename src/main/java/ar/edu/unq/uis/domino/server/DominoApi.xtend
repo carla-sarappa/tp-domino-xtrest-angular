@@ -74,13 +74,29 @@ class DominoApi {
     def getPedidos(){
     	execute(response)[     	
     		try {
-    			val cliente = Repositories.clientes.searchById(Integer.parseInt(request.getParameter("userId")))
-	    		return ok(Repositories.pedidos.historial(cliente).map[PedidoRequest.from(it)].toJson)
+    			val pedidos = if (request.getParameter("userId") != null){
+	    			val cliente = Repositories.clientes.searchById(Integer.parseInt(request.getParameter("userId")))
+	    			Repositories.pedidos.historial(cliente)
+       			} else {
+       				Repositories.pedidos.allInstances
+       			}
+       			
+				val filtrados = if (request.getParameter("estado") != null){
+	    				pedidos.filter[it.hasEstado(request.getParameter("estado") )]
+	      			} else {
+       					pedidos
+       				}
+       			return ok(filtrados.map[PedidoRequest.from(it)].toList.toJson)
+       			
     		} catch(NumberFormatException e) {
     			return ok([].toJson)
     		}
 		]
     }
+    
+    //    			val estado = request.getParameter("estado")
+    
+ 
     
     @Get("/pedidos/:id")
     def getPedido() {

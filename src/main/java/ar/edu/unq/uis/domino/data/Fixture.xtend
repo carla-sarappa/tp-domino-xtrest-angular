@@ -24,6 +24,8 @@ import java.util.Date
 import ar.edu.unq.uis.domino.model.Cancelado
 import ar.edu.unq.uis.domino.model.Entregado
 import ar.edu.unq.uis.domino.model.IngredienteDistribuido
+import ar.edu.unq.uis.domino.model.ListoParaEnviar
+import ar.edu.unq.uis.domino.model.EnViaje
 
 class Fixture {
 	def run() {
@@ -96,7 +98,7 @@ class Fixture {
 		val pedido2 = repoPedido.createPedido(gisele, new RetiraPorElLocal)
 		pedido2.fecha = new Date(System.currentTimeMillis - minutos(20))
 		val pedido3 = repoPedido.createPedido(fede, new RetiraPorElLocal)
-		val pedido4 = repoPedido.createPedido(carlaSarappa, new Delivery("calle falsa 123"))
+		val pedido4 = repoPedido.createPedido(carlaSarappa, new Delivery("Calle Falsa 123"))
 		val pedido5 = repoPedido.createPedido(maria, new RetiraPorElLocal)
 		val pedido6 = repoPedido.createPedido(maria, new Delivery("Lebenshon 44"))
 		
@@ -105,10 +107,18 @@ class Fixture {
 		pedido7.estado = new Cancelado
 		
 		
-		val pedido8 = repoPedido.createPedido(gisele, new RetiraPorElLocal)
+		val pedido8 = repoPedido.createPedido(carlaSarappa, new RetiraPorElLocal)
 		pedido8.fecha = new Date("2017/09/27")
 		pedido8.estado = new Entregado
 		pedido8.fechaCerrado = new Date()
+		
+		val pedido9 = repoPedido.createPedido(gisele, new Delivery("Corrientes 949"))
+		pedido9.fecha = new Date("2017/11/27")
+		pedido9.estado = new ListoParaEnviar
+		
+		val pedido10 = repoPedido.createPedido(carlaSarappa, new Delivery("Rodriguez Pena 1889"))
+		pedido10.fecha = new Date("2017/11/27")
+		pedido10.estado = new EnViaje
 
 		
 		val repoPlato = ApplicationContext.instance.getSingleton(typeof(Plato)) as RepoPlato
@@ -125,7 +135,15 @@ class Fixture {
 			createPlato(napolitana, Tamanio.PORCION, pedido4)
 			
 			createPlato(cuatroQuesos, Tamanio.PORCION, pedido5)
+			
 			createPlato(cuatroQuesos, Tamanio.PORCION, pedido6)
+			createPlato(cuatroQuesos, Tamanio.CHICA, pedido6)
+			
+			createPlato(cuatroQuesos, Tamanio.GRANDE, pedido7)
+			createPlato(cuatroQuesos, Tamanio.CHICA, pedido8)
+			createPlato(cuatroQuesos, Tamanio.PORCION, pedido9)
+			createPlato(cuatroQuesos, Tamanio.FAMILIAR, pedido10)
+				
 		]
 	}
 	
