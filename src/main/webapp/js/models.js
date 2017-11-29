@@ -24,7 +24,6 @@ function pedidoFromJson(json) {
     var pedido = new Pedido();
     angular.extend(pedido, json);
     pedido.platos = pedido.platos.map(platoFromJson);
-    console.log('PEDIDO: ', pedido);
     return pedido;
 }
 

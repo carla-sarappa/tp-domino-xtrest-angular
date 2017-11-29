@@ -2,6 +2,7 @@ var app = angular.module('dominoApp', ['ui.router','ngResource']);
 var HOST = "http://localhost:9000/";
 app.config(function($stateProvider) {
     $stateProvider.state('login', {
+        url: '/login',
         templateUrl: 'login/login.html',
         controller: 'LoginCtrl'
     });

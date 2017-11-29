@@ -14,6 +14,7 @@ class PlatoRequest {
 	Integer pizza
 	List<IngredienteDistribuidoRequest> extras
 	String tamanio
+	Double precio
 	
 	new() {}
 	
@@ -22,6 +23,7 @@ class PlatoRequest {
 		platoRequest.pizza = plato.pizzaBase.id
 		platoRequest.extras = plato.ingredientes.map[new IngredienteDistribuidoRequest(it)]
 		platoRequest.tamanio = plato.tamanio.nombre
+		platoRequest.precio = plato.precio
 		platoRequest
 	}
 	

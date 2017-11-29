@@ -10,6 +10,7 @@ app.controller('PedidoCtrl', function($resource, $timeout, $scope, $state, Pedid
     $scope.confirmarPedido = function(){
         console.log($scope.$parent.pedido);
         Pedidos.crearPedido($scope.$parent.pedido, function () {
+            //TODO: limpiar el pedido ya viejo
             $state.go('usuario');
         }, function (error) {
             console.log(error)
