@@ -26,7 +26,7 @@ app.controller('UsuarioCtrl', function($resource, $timeout, $scope, $state, Usua
 
     $scope.repetirPedido = function (pedido) {
         $scope.$parent.pedido = pedido;
-        $state.go('pedido');
+        $state.go('pedido'); //TODO chequear repetido sin cambiar
     }
 
 }).service('UsuarioService', function($http) {
