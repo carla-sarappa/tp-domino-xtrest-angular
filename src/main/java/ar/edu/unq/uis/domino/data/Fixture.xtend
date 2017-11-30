@@ -120,6 +120,13 @@ class Fixture {
 		pedido10.fecha = new Date("2017/11/27")
 		pedido10.estado = new EnViaje
 
+		val pedido11 = repoPedido.createPedido(gisele, new Delivery("Colon 44"))
+		pedido11.fecha = new Date("2017/11/27")
+		pedido11.estado = new EnViaje
+		
+		val pedido12 = repoPedido.createPedido(carlaSarappa, new Delivery("Belgrano 399"))
+		pedido12.fecha = new Date("2017/11/27")
+		pedido12.estado = new ListoParaEnviar
 		
 		val repoPlato = ApplicationContext.instance.getSingleton(typeof(Plato)) as RepoPlato
 		
@@ -143,6 +150,9 @@ class Fixture {
 			createPlato(cuatroQuesos, Tamanio.CHICA, pedido8)
 			createPlato(cuatroQuesos, Tamanio.PORCION, pedido9)
 			createPlato(cuatroQuesos, Tamanio.FAMILIAR, pedido10)
+			
+			createPlato(margherita, Tamanio.FAMILIAR, pedido11)
+			createPlato(napolitana, Tamanio.FAMILIAR, pedido12)
 				
 		]
 	}
