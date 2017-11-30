@@ -131,6 +131,10 @@ class Fixture {
 		pedido12.fecha = new Date("2017/11/27")
 		pedido12.estado = new ListoParaEnviar
 		
+		val pedido13 = repoPedido.createPedido(carlaSarappa, new Delivery("Belgrano 399"))
+		pedido12.fecha = new Date("2017/11/27")
+		pedido12.estado = new ListoParaEnviar
+		
 		val repoPlato = ApplicationContext.instance.getSingleton(typeof(Plato)) as RepoPlato
 		
 		val plato1pedido1 = repoPlato.createPlato(calabresa, Tamanio.FAMILIAR, pedido1)
@@ -148,13 +152,19 @@ class Fixture {
 		val plato1pedido10 = repoPlato.createPlato(cuatroQuesos, Tamanio.FAMILIAR, pedido10)
 		val plato1pedido11 = repoPlato.createPlato(margherita, Tamanio.FAMILIAR, pedido11)
 		val plato1pedido12 = repoPlato.createPlato(napolitana, Tamanio.FAMILIAR, pedido12)
+		val plato1pedido13 = repoPlato.createPlato(anana, Tamanio.FAMILIAR, pedido13)
 		plato1pedido12.agregarExtra(jalapeñoDistrib)
  		plato1pedido12.agregarExtra(tomateSecoDistrib)
 		plato1pedido12.agregarExtra(extraQuesoDistrib)
 		plato1pedido12.agregarExtra(jamonCrudoDistrib)
 		plato1pedido12.agregarExtra(provoloneRalladoDistrib)
 		plato1pedido12.agregarExtra(salameRodajasDistrib)
-		plato1pedido12.agregarExtra(salameRodajasDistrib)
+		plato1pedido13.agregarExtra(salameRodajasDistrib)
+		pedido9.setAclaraciones("Tiren el pedido por la ventana")
+		pedido10.setAclaraciones("Tocar timbre depto del fondo")
+		pedido11.setAclaraciones("Dejenselas a la vieja del fondo")
+		pedido12.setAclaraciones("Que esta vez no se les vuelque la salsa")
+		pedido13.setAclaraciones("Tocar timbre depto del fondo")
 	
 		}
 	

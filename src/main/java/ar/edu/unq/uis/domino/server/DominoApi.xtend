@@ -94,9 +94,6 @@ class DominoApi {
 		]
     }
     
-    //    			val estado = request.getParameter("estado")
-    
- 
     
     @Get("/pedidos/:id")
     def getPedido() {
