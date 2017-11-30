@@ -30,49 +30,51 @@ import ar.edu.unq.uis.domino.model.EnViaje
 class Fixture {
 	def run() {
 		val repoPizza = ApplicationContext.instance.getSingleton(typeof(Pizza)) as RepoPizza
-		val calabresa = repoPizza.createPromo("Calabresa", 40.0)
+		val calabresa = repoPizza.createPromo("Calabresa", 140.0)
 		val napolitana = repoPizza.createPromo("Napolitana", 100.0)
-		val margherita = repoPizza.createPromo("Margherita", 80.0)
-		val cuatroQuesos = repoPizza.createPromo("Cuatro quesos", 20.0)
+		val margherita = repoPizza.createPromo("Margherita", 180.0)
+		val cuatroQuesos = repoPizza.createPromo("Cuatro quesos", 190.0)
+		val caprese = repoPizza.createPromo("Capresse", 150.0)
+		val palmitos = repoPizza.createPromo("Palmitos", 120.0)
+		val jamon = repoPizza.createPromo("Jamon y queso", 125.0)
+		val jamonYmorrones = repoPizza.createPromo("Jamon y morrones", 130.0)
+		val anana = repoPizza.createPromo("Anana", 135.0)
 		
-		repoPizza => [
-			createPromo("Capresse", 15.0)
-			createPromo("Palmitos", 20.0)
-			createPromo("Jamon y queso", 25.0)
-			createPromo("Jamon y morrones", 30.0)
-			createPromo("Anana", 35.0)
-		]
 		
 		val repoIngredientes = ApplicationContext.instance.getSingleton(typeof(Ingrediente)) as RepoIngredientes
 		val aceitunas = repoIngredientes.createIngrediente("Aceitunas", 5.0)
-		
-		repoIngredientes => [
-			createIngrediente("Tomate seco", 1.0)
-			createIngrediente("Extra queso", 1.0)
-			createIngrediente("Jamon crudo", 1.0)
-			createIngrediente("Provolone rallado", 1.0)
-			createIngrediente("Anchoas sueltas", 1.0)
-			createIngrediente("Salame rodajas", 1.0)
-		]
-		
+		val jalapeño = repoIngredientes.createIngrediente("Jalapeño", 12.0)
+		val anchoas = repoIngredientes.createIngrediente("Anchoas", 22.0)
+	
+		val tomateSeco = repoIngredientes.createIngrediente("Tomate seco", 6.0)
+		val extraQueso = repoIngredientes.createIngrediente("Extra queso", 1.0)
+		val jamonCrudo = repoIngredientes.createIngrediente("Jamon crudo", 3.0)
+		val provoloneRallado = repoIngredientes.createIngrediente("Provolone rallado", 11.0)
+		val salameRodajas = repoIngredientes.createIngrediente("Salame rodajas", 2.0)
+				
 		
 		val repoDistribucion = ApplicationContext.instance.getSingleton(typeof(Distribucion)) as RepoDistribucion
 		
-		repoDistribucion => [
-			createDistribucion("Toda la pizza")
-			createDistribucion("Mitad izquierda")
-			createDistribucion("Mitad derecha")
-		]
+		val todaLaPizza = repoDistribucion.createDistribucion("Toda la pizza")
+		val mitadIzquierda = repoDistribucion.createDistribucion("Mitad izquierda")
+		val mitadDerecha = repoDistribucion.createDistribucion("Mitad derecha")
 		
-		val aceitunasDistrib = new IngredienteDistribuido(aceitunas, new Distribucion("Toda la pizza"))
-		val anchoas = new Ingrediente("Anchoas", 22.0)
-		val anchoasDistrib = new IngredienteDistribuido(anchoas, new Distribucion("Toda la pizza"))
+
+		val aceitunasDistrib = new IngredienteDistribuido(aceitunas, todaLaPizza)
+		val anchoasDistrib = new IngredienteDistribuido(anchoas, mitadIzquierda)		
+		val jalapeñoDistrib = new IngredienteDistribuido(jalapeño, mitadDerecha)
+		val tomateSecoDistrib = new IngredienteDistribuido(tomateSeco, todaLaPizza)
+		val extraQuesoDistrib = new IngredienteDistribuido(extraQueso, todaLaPizza)
+		val jamonCrudoDistrib = new IngredienteDistribuido(jamonCrudo, mitadIzquierda)
+		val provoloneRalladoDistrib = new IngredienteDistribuido(provoloneRallado, mitadDerecha)
+		val salameRodajasDistrib = new IngredienteDistribuido(salameRodajas, mitadIzquierda)
+				
+		
 		calabresa.agregarIngrediente(aceitunasDistrib)
 		calabresa.agregarIngrediente(anchoasDistrib)
 		napolitana.agregarIngrediente(aceitunasDistrib)
 		margherita.agregarIngrediente(anchoasDistrib)
 		cuatroQuesos.agregarIngrediente(aceitunasDistrib)		
-		
 		
 		
 		val repoCliente = ApplicationContext.instance.getSingleton(typeof(Cliente)) as RepoCliente
@@ -124,38 +126,37 @@ class Fixture {
 		pedido11.fecha = new Date("2017/11/27")
 		pedido11.estado = new EnViaje
 		
+		
 		val pedido12 = repoPedido.createPedido(carlaSarappa, new Delivery("Belgrano 399"))
 		pedido12.fecha = new Date("2017/11/27")
 		pedido12.estado = new ListoParaEnviar
 		
 		val repoPlato = ApplicationContext.instance.getSingleton(typeof(Plato)) as RepoPlato
 		
-		repoPlato => [
-			createPlato(calabresa, Tamanio.FAMILIAR, pedido1)
-			
-			createPlato(napolitana, Tamanio.GRANDE, pedido2)
-			createPlato(calabresa, Tamanio.CHICA, pedido2)
-			createPlato(cuatroQuesos, Tamanio.PORCION, pedido2)
-			
-			createPlato(margherita, Tamanio.CHICA, pedido3)
-			
-			createPlato(napolitana, Tamanio.PORCION, pedido4)
-			
-			createPlato(cuatroQuesos, Tamanio.PORCION, pedido5)
-			
-			createPlato(cuatroQuesos, Tamanio.PORCION, pedido6)
-			createPlato(cuatroQuesos, Tamanio.CHICA, pedido6)
-			
-			createPlato(cuatroQuesos, Tamanio.GRANDE, pedido7)
-			createPlato(cuatroQuesos, Tamanio.CHICA, pedido8)
-			createPlato(cuatroQuesos, Tamanio.PORCION, pedido9)
-			createPlato(cuatroQuesos, Tamanio.FAMILIAR, pedido10)
-			
-			createPlato(margherita, Tamanio.FAMILIAR, pedido11)
-			createPlato(napolitana, Tamanio.FAMILIAR, pedido12)
-				
-		]
-	}
+		val plato1pedido1 = repoPlato.createPlato(calabresa, Tamanio.FAMILIAR, pedido1)
+		val plato1pedido2 = repoPlato.createPlato(napolitana, Tamanio.GRANDE, pedido2)
+		val plato2pedido2 = repoPlato.createPlato(calabresa, Tamanio.CHICA, pedido2)
+		val plato3pedido2 = repoPlato.createPlato(cuatroQuesos, Tamanio.PORCION, pedido2)
+		val plato1pedido3 = repoPlato.createPlato(margherita, Tamanio.CHICA, pedido3)
+		val plato1pedido4 = repoPlato.createPlato(napolitana, Tamanio.PORCION, pedido4)
+		val plato1pedido5 = repoPlato.createPlato(cuatroQuesos, Tamanio.PORCION, pedido5)
+		val plato1pedido6 = repoPlato.createPlato(cuatroQuesos, Tamanio.PORCION, pedido6)
+		val plato2pedido6 = repoPlato.createPlato(cuatroQuesos, Tamanio.CHICA, pedido6)
+		val plato1pedido7 = repoPlato.createPlato(cuatroQuesos, Tamanio.GRANDE, pedido7)
+		val plato1pedido8 = repoPlato.createPlato(cuatroQuesos, Tamanio.CHICA, pedido8)
+		val plato1pedido9 = repoPlato.createPlato(cuatroQuesos, Tamanio.PORCION, pedido9)
+		val plato1pedido10 = repoPlato.createPlato(cuatroQuesos, Tamanio.FAMILIAR, pedido10)
+		val plato1pedido11 = repoPlato.createPlato(margherita, Tamanio.FAMILIAR, pedido11)
+		val plato1pedido12 = repoPlato.createPlato(napolitana, Tamanio.FAMILIAR, pedido12)
+		plato1pedido12.agregarExtra(jalapeñoDistrib)
+ 		plato1pedido12.agregarExtra(tomateSecoDistrib)
+		plato1pedido12.agregarExtra(extraQuesoDistrib)
+		plato1pedido12.agregarExtra(jamonCrudoDistrib)
+		plato1pedido12.agregarExtra(provoloneRalladoDistrib)
+		plato1pedido12.agregarExtra(salameRodajasDistrib)
+		plato1pedido12.agregarExtra(salameRodajasDistrib)
+	
+		}
 	
 	def minutos(int i) {
 		i *60*1000 
